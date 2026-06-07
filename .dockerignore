@@ -1,0 +1,9 @@
+node_modules
+.env
+.git
+venv
+tests
+error_logs
+*.log
+*.csv
+.DS_Store

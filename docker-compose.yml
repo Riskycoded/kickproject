@@ -1,0 +1,39 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://db:27017/voidkid
+      - PORT=3000
+      - HTTPS=false
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  webserver:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  redis-cache:
+    image: redis:latest
+    ports:
+      - "6380:6379" # Remapped host port to 6380 to avoid collision on 6379
+
+volumes:
+  mongo-data:

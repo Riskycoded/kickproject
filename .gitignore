@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env*.local
+venv/
+*.log
+error_logs/
+successful_accounts.csv
+.DS_Store
+__pycache__/
+*.pyc
